@@ -5,13 +5,13 @@ A modular and lightweight blockchain development kit for interacting with any MS
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
-- [Setup](#setup)
 - [Quick Start](#quick-start)
   - [1. Initialize the Client](#1-initialize-the-client)
   - [2. Generate a Random Wallet](#2-generate-a-random-wallet)
   - [3. Check Account Balance (via Provider)](#3-check-account-balance-via-provider)
   - [4. Estimate Gas & Send Transactions](#4-estimate-gas--send-transactions)
   - [5. Deploy Contract & Get Address](#5-deploy-contract--get-address)
+- [Networks](#networks)
 - [Core Modules](#core-modules)
   - [1. Client](#1-client)
   - [2. Provider](#2-provider-read-only)
@@ -26,6 +26,7 @@ A modular and lightweight blockchain development kit for interacting with any MS
 - **Provider Management**: Simple JSON-RPC provider (via `web3.py`) for fetching block data and account state.
 - **Secure Signing**: Integrated `Signer` using `eth-account` for secure transaction signing and address management.
 - **Balances**: Built-in utilities for checking native token balances.
+- **Network Selection**: Pick `"mainnet"` or `"testnet"` and the SDK resolves the correct RPC endpoint for you — no config files or env vars needed.
 
 ## Installation
 
@@ -41,23 +42,7 @@ pip install -e .
 
 *(Recommended: do this inside a virtual environment — `python -m venv .venv` then activate it — before installing.)*
 
-## Setup
-
-Copy the example environment file and fill in your details:
-
-```bash
-cp .env.example .env
-```
-
-```
-RPC_URL=https://testnetrpc.mstblockchain.com
-PRIVATE_KEY=
-```
-
-- `RPC_URL`: the JSON-RPC endpoint to connect to (defaults to the MST testnet).
-- `PRIVATE_KEY`: your wallet's private key, only required for signing/sending transactions. Leave blank for read-only usage or when generating a random wallet.
-
-Never commit a filled-in `.env` file — it's git-ignored by default.
+There is no `.env` file or environment configuration to set up. The network is selected by name at runtime, and the private key is passed directly wherever you construct a `Client` — both are plain user input, not config.
 
 ## Quick Start
 
@@ -66,17 +51,16 @@ Never commit a filled-in `.env` file — it's git-ignored by default.
 ```python
 from blockchain_sdk import Client
 
-rpc_url = "https://testnetrpc.mstblockchain.com"
 private_key = "0x..."
 
-client = Client(rpc_url, private_key)
+client = Client("testnet", private_key)   # or "mainnet"
 ```
 
 ### 2. Generate a Random Wallet
 
 ```python
 # Creates a new client with a fresh random private key
-client = Client.create_random(rpc_url)
+client = Client.create_random("testnet")
 print(f"Generated Address: {client.signer.address}")
 print(f"Private Key: {client.signer.get_private_key()}")
 ```
@@ -123,11 +107,30 @@ receipt = client.provider.wait_for_transaction(tx_hash)
 print(f"Contract Deployed at: {receipt.contractAddress}")
 ```
 
+## Networks
+
+`Client` resolves its RPC endpoint from a network name (defined in `blockchain_sdk.utils.constants.NETWORKS`):
+
+| Network   | RPC URL |
+|-----------|---------|
+| `testnet` (default) | `https://testnetrpc.mstblockchain.com` |
+| `mainnet` | `https://mariorpc.mstblockchain.com/` |
+
+```python
+from blockchain_sdk import Client
+
+testnet_client = Client("testnet", private_key)
+mainnet_client = Client("mainnet", private_key)
+```
+
+Passing an unrecognized network name raises a `ValueError`.
+
 ## Core Modules
 
 ### 1. `Client`
 The root container and main entry point.
-- `Client.create_random(rpc_url)`: Returns a new `Client` instance with a random signer.
+- `Client(network="testnet", private_key=None)`: Resolves the RPC URL for `network` and constructs the `Provider`/`Signer`.
+- `Client.create_random(network="testnet")`: Returns a new `Client` instance with a random signer.
 - `provider`: Instance of `Provider`.
 - `signer`: Instance of `Signer` (if `private_key` provided).
 

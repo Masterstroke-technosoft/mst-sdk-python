@@ -1,8 +1,7 @@
 from blockchain_sdk import Client
-from blockchain_sdk.utils.constants import DEFAULT_RPC_URL
 
-# Generate a random wallet
-client = Client.create_random(DEFAULT_RPC_URL)
+# Generate a random wallet on testnet
+client = Client.create_random("testnet")
 print("Address:", client.signer.address)
 print("Private key:", client.signer.get_private_key())
 
