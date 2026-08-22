@@ -3,16 +3,30 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "blockchain-sdk"
+name = "mst-sdk-python"
 version = "1.0.0"
-description = "A blockchain SDK development project (Python port)"
+description = "A modular and lightweight Python SDK for interacting with MST-compatible blockchain networks."
 readme = "README.md"
-license = { text = "ISC" }
+license = "MIT"
+license-files = ["LICENSE*"]
 requires-python = ">=3.9"
+authors = [
+    { name = "Mst Blockchain", email = "tech@mstblockchain.com" },
+]
+keywords = ["blockchain", "sdk", "web3"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "web3>=6.15.0",
     "eth-account>=0.11.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Masterstroke-technosoft/mst-sdk-python"
+Issues = "https://github.com/Masterstroke-technosoft/mst-sdk-python/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

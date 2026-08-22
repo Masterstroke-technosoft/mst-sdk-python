@@ -1,6 +1,6 @@
 # MST Blockchain SDK (Python)
 
-A modular and lightweight blockchain development kit for interacting with any MST-compatible network. This is a Python port of the [MST Blockchain SDK](../basic-bc-sdk) (JS), built on `web3.py` and `eth-account`, providing the same easy-to-use abstractions for providers, signers, and contract interactions.
+A modular and lightweight blockchain development kit for interacting with any MST-compatible network. This is a Python port of the [MST Blockchain SDK](https://github.com/Masterstroke-technosoft/basic-bc-sdk) (JS), built on `web3.py` and `eth-account`, providing the same easy-to-use abstractions for providers, signers, and contract interactions.
 
 ## Table of Contents
 - [Features](#features)
@@ -169,4 +169,4 @@ pytest
 
 ## License
 
-ISC
+MIT
