@@ -5,7 +5,7 @@ import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from blockchain_sdk import Client, Provider, Errors
+from mst_blockchain_sdk import Client, Provider, Errors
 
 
 def test_wallet_error_on_invalid_key():

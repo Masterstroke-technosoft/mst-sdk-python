@@ -1,4 +1,4 @@
-from blockchain_sdk import Client
+from mst_blockchain_sdk import Client
 
 # Generate a random wallet on testnet
 client = Client.create_random("testnet")

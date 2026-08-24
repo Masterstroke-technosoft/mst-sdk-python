@@ -34,7 +34,7 @@ A modular and lightweight blockchain development kit for interacting with any MS
 pip install -r requirements.txt
 ```
 
-For local development (so the `blockchain_sdk` package resolves from `src/`), install it in editable mode:
+For local development (so the `mst_blockchain_sdk` package resolves from `src/`), install it in editable mode:
 
 ```bash
 pip install -e .
@@ -49,7 +49,7 @@ There is no `.env` file or environment configuration to set up. The network is s
 ### 1. Initialize the Client
 
 ```python
-from blockchain_sdk import Client
+from mst_blockchain_sdk import Client
 
 private_key = "0x..."
 
@@ -109,7 +109,7 @@ print(f"Contract Deployed at: {receipt.contractAddress}")
 
 ## Networks
 
-`Client` resolves its RPC endpoint from a network name (defined in `blockchain_sdk.utils.constants.NETWORKS`):
+`Client` resolves its RPC endpoint from a network name (defined in `mst_blockchain_sdk.utils.constants.NETWORKS`):
 
 | Network   | RPC URL |
 |-----------|---------|
@@ -117,7 +117,7 @@ print(f"Contract Deployed at: {receipt.contractAddress}")
 | `mainnet` | `https://mariorpc.mstblockchain.com/` |
 
 ```python
-from blockchain_sdk import Client
+from mst_blockchain_sdk import Client
 
 testnet_client = Client("testnet", private_key)
 mainnet_client = Client("mainnet", private_key)
@@ -154,7 +154,7 @@ Accessed via `client.signer`.
 - `get_address()`: Returns the signer's public address.
 
 ### 4. `Errors`
-Custom error classes for better debugging (`blockchain_sdk.Errors`).
+Custom error classes for better debugging (`mst_blockchain_sdk.Errors`).
 - `ProviderError`: Network or RPC issues.
 - `TransactionError`: Validation or on-chain submission failures.
 - `WalletError`: Private key or signer initialization issues.

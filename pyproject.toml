@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mst-sdk-python"
-version = "1.0.0"
+version = "1.0.1"
 description = "A modular and lightweight Python SDK for interacting with MST-compatible blockchain networks."
 readme = "README.md"
 license = "MIT"

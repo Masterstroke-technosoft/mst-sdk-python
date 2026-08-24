@@ -3,7 +3,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from blockchain_sdk import Client
+from mst_blockchain_sdk import Client
 
 
 def test_create_random_has_provider_and_signer():
